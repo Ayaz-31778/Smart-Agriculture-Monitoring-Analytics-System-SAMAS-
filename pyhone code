@@ -1,0 +1,68 @@
+# Smart Agriculture Monitoring & Analytics
+
+def analyze_conditions(temp, humidity, soil_moisture, rainfall):
+    print("\n--- Field Analysis Report ---")
+
+    # Temperature Analysis
+    if temp > 35:
+        print("High temperature! Risk of crop stress.")
+    elif temp < 15:
+        print("Low temperature! Slow crop growth.")
+    else:
+        print("Temperature is optimal for crops.")
+
+    # Humidity Analysis
+    if humidity > 80:
+        print("High humidity! Risk of fungal diseases.")
+    else:
+        print("Humidity level is normal.")
+
+    # Soil Moisture Analysis
+    if soil_moisture < 30:
+        print("Soil is dry. Irrigation needed.")
+    elif soil_moisture > 70:
+        print("Soil too wet. Avoid watering.")
+    else:
+        print("Soil moisture is adequate.")
+
+    # Rainfall Analysis
+    if rainfall > 50:
+        print("Heavy rainfall detected.")
+    else:
+        print("Rainfall is within safe limits.")
+
+
+def analytics(data):
+    avg_temp = sum(d[0] for d in data) / len(data)
+    avg_humidity = sum(d[1] for d in data) / len(data)
+    avg_moisture = sum(d[2] for d in data) / len(data)
+
+    print("\n--- Analytics Summary ---")
+    print("Average Temperature:", round(avg_temp, 2))
+    print("Average Humidity:", round(avg_humidity, 2))
+    print("Average Soil Moisture:", round(avg_moisture, 2))
+
+
+# Main Program
+print("====== Smart Agriculture Monitoring System ======")
+
+records = []
+
+n = int(input("Enter number of field records: "))
+
+for i in range(n):
+    print("\nEnter details for record", i+1)
+
+    temperature = float(input("Temperature (°C): "))
+    humidity = float(input("Humidity (%): "))
+    soil = float(input("Soil Moisture (%): "))
+    rainfall = float(input("Rainfall (mm): "))
+
+    records.append((temperature, humidity, soil, rainfall))
+
+    analyze_conditions(temperature, humidity, soil, rainfall)
+
+# Show analytics
+analytics(records)
+
+print("\nSystem Analysis Completed!")
