@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+
+def plot_data(records):
+    temps = [r[0] for r in records]
+    humidity = [r[1] for r in records]
+
+    plt.plot(temps)
+    plt.title("Temperature Trend")
+    plt.xlabel("Records")
+    plt.ylabel("Temperature")
+    plt.show()
+
+    plt.plot(humidity)
+    plt.title("Humidity Trend")
+    plt.xlabel("Records")
+    plt.ylabel("Humidity")
+    plt.show()
