@@ -1,0 +1,159 @@
+# ===== Smart Agriculture Monitoring & Analytics System =====
+
+import csv
+import os
+import matplotlib.pyplot as plt
+
+
+# ================= MODULE 1: INPUT HANDLING =================
+def get_user_input():
+    try:
+        n = int(input("Enter number of field records: "))
+        records = []
+
+        for i in range(n):
+            print(f"\nEnter details for record {i+1}")
+
+            temperature = float(input("Temperature (°C): "))
+            humidity = float(input("Humidity (%): "))
+            soil = float(input("Soil Moisture (%): "))
+            rainfall = float(input("Rainfall (mm): "))
+
+            records.append((temperature, humidity, soil, rainfall))
+
+        return records
+
+    except ValueError:
+        print("Invalid input! Please enter numeric values.")
+        return []
+
+
+# ================= MODULE 2: DATA MODEL =================
+class FieldRecord:
+    def __init__(self, temperature, humidity, soil_moisture, rainfall):
+        self.temperature = temperature
+        self.humidity = humidity
+        self.soil_moisture = soil_moisture
+        self.rainfall = rainfall
+
+    def to_tuple(self):
+        return (
+            self.temperature,
+            self.humidity,
+            self.soil_moisture,
+            self.rainfall
+        )
+
+
+# ================= MODULE 3: ANALYSIS =================
+def analyze_conditions(temp, humidity, soil_moisture, rainfall):
+    print("\n--- Field Analysis Report ---")
+
+    if temp > 35:
+        print("High temperature! Risk of crop stress.")
+    elif temp < 15:
+        print("Low temperature! Slow crop growth.")
+    else:
+        print("Temperature is optimal for crops.")
+
+    if humidity > 80:
+        print("High humidity! Risk of fungal diseases.")
+    else:
+        print("Humidity level is normal.")
+
+    if soil_moisture < 30:
+        print("Soil is dry. Irrigation needed.")
+    elif soil_moisture > 70:
+        print("Soil too wet. Avoid watering.")
+    else:
+        print("Soil moisture is adequate.")
+
+    if rainfall > 50:
+        print("Heavy rainfall detected.")
+    else:
+        print("Rainfall is within safe limits.")
+
+
+# ================= MODULE 3: ANALYTICS =================
+def calculate_analytics(data):
+    avg_temp = sum(d[0] for d in data) / len(data)
+    avg_humidity = sum(d[1] for d in data) / len(data)
+    avg_moisture = sum(d[2] for d in data) / len(data)
+
+    return avg_temp, avg_humidity, avg_moisture
+
+
+def display_analytics(avg_temp, avg_humidity, avg_moisture):
+    print("\n--- Analytics Summary ---")
+    print("Average Temperature:", round(avg_temp, 2))
+    print("Average Humidity:", round(avg_humidity, 2))
+    print("Average Soil Moisture:", round(avg_moisture, 2))
+
+
+# ================= MODULE 3: FILE HANDLING =================
+def save_to_csv(records, filename="records.csv"):
+    with open(filename, mode="w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Temperature", "Humidity", "Soil Moisture", "Rainfall"])
+        writer.writerows(records)
+
+    print("\nData saved to CSV successfully!")
+
+
+# ================= MODULE 4: VISUALIZATION =================
+def plot_data(records):
+    temps = [r[0] for r in records]
+    humidity = [r[1] for r in records]
+    soil = [r[2] for r in records]
+
+    # Temperature Plot
+    plt.figure()
+    plt.plot(temps)
+    plt.title("Temperature Trend")
+    plt.xlabel("Record Index")
+    plt.ylabel("Temperature (°C)")
+    plt.show()
+
+    # Humidity Plot
+    plt.figure()
+    plt.plot(humidity)
+    plt.title("Humidity Trend")
+    plt.xlabel("Record Index")
+    plt.ylabel("Humidity (%)")
+    plt.show()
+
+    # Soil Moisture Plot
+    plt.figure()
+    plt.plot(soil)
+    plt.title("Soil Moisture Trend")
+    plt.xlabel("Record Index")
+    plt.ylabel("Soil Moisture (%)")
+    plt.show()
+
+
+# ================= MAIN PROGRAM =================
+def main():
+    print("====== Smart Agriculture Monitoring System ======")
+
+    raw_records = get_user_input()
+    records = []
+
+    for r in raw_records:
+        record = FieldRecord(*r)
+        records.append(record.to_tuple())
+
+        analyze_conditions(*r)
+
+    if records:
+        avg_temp, avg_humidity, avg_moisture = calculate_analytics(records)
+        display_analytics(avg_temp, avg_humidity, avg_moisture)
+
+        save_to_csv(records)
+        plot_data(records)
+
+    print("\nSystem Analysis Completed!")
+
+
+# Run Program
+if __name__ == "__main__":
+    main()
