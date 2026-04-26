@@ -1,0 +1,26 @@
+def analyze_conditions(temp, humidity, soil_moisture, rainfall):
+    print("\n--- Field Analysis Report ---")
+
+    if temp > 35:
+        print("High temperature! Risk of crop stress.")
+    elif temp < 15:
+        print("Low temperature! Slow crop growth.")
+    else:
+        print("Temperature is optimal for crops.")
+
+    if humidity > 80:
+        print("High humidity! Risk of fungal diseases.")
+    else:
+        print("Humidity level is normal.")
+
+    if soil_moisture < 30:
+        print("Soil is dry. Irrigation needed.")
+    elif soil_moisture > 70:
+        print("Soil too wet. Avoid watering.")
+    else:
+        print("Soil moisture is adequate.")
+
+    if rainfall > 50:
+        print("Heavy rainfall detected.")
+    else:
+        print("Rainfall is within safe limits.")
