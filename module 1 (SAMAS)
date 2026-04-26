@@ -1,0 +1,20 @@
+def get_user_input():
+    try:
+        n = int(input("Enter number of field records: "))
+        records = []
+
+        for i in range(n):
+            print(f"\nEnter details for record {i+1}")
+
+            temperature = float(input("Temperature (°C): "))
+            humidity = float(input("Humidity (%): "))
+            soil = float(input("Soil Moisture (%): "))
+            rainfall = float(input("Rainfall (mm): "))
+
+            records.append((temperature, humidity, soil, rainfall))
+
+        return records
+
+    except ValueError:
+        print("Invalid input! Please enter correct numeric values.")
+        return []
