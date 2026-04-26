@@ -1,0 +1,9 @@
+class FieldRecord:
+    def __init__(self, temperature, humidity, soil_moisture, rainfall):
+        self.temperature = temperature
+        self.humidity = humidity
+        self.soil_moisture = soil_moisture
+        self.rainfall = rainfall
+
+    def to_tuple(self):
+        return (self.temperature, self.humidity, self.soil_moisture, self.rainfall)
