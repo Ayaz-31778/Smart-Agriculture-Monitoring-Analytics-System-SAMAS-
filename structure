@@ -1,0 +1,20 @@
+smart_agriculture/
+│── main.py
+│── requirements.txt
+│
+├── module1_foundations/
+│   └── input_handler.py
+│
+├── module2_data_structures/
+│   └── data_models.py
+│
+├── module3_scalable/
+│   ├── analyzer.py
+│   ├── analytics.py
+│   └── file_handler.py
+│
+├── module4_ai_ml/
+│   └── visualization.py
+│
+└── data/
+    └── records.csv
